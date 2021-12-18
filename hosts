@@ -1,0 +1,11 @@
+linux:
+  hosts:
+    sandbox-kali:
+    karpov:
+
+
+win:
+  hosts:
+    sandbox-win:
+    kasparov:
+
