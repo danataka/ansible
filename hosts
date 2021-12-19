@@ -1,11 +1,12 @@
 linux:
   hosts:
     sandbox-kali:
-    karpov:
+    karpov.local:
+    fischer.local:
 
 
 win:
   hosts:
     sandbox-win:
-    kasparov:
+    kasparov.local:
 
