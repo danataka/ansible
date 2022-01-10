@@ -1,12 +1,20 @@
 linux:
   hosts:
-    sandbox-kali:
-    karpov.local:
-    fischer.local:
-
+    karpov.local: # Ubuntu Surface
+    fischer.local: # Pi
+    spasky.local: # Sandbox Kali
+    short.local: # Ubuntu laptop
 
 win:
   hosts:
-    sandbox-win:
-    kasparov.local:
+    tal.local: # Work Laptop
+    kasparov.local: # Desktop
+    lasker.local: # Sandbox Windows 10
+    anand.local: # Sandbox Server 2012R2
+    carlsen.local: # Sandbox Server 2016
+    capablanca.local: # Sandbox Server 2019 
 
+sandbox:
+  hosts:
+    lasker.local:
+    spasky.local:

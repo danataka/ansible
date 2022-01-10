@@ -1,0 +1,22 @@
+---
+# Windows Patches
+# passing in list of KBs in for of list -e "KBs=kb5008212,kb5008213,kb5008214"
+
+- hosts: all
+  collections:
+    - community.windows
+
+  tasks:
+    # Parse Input
+  - name: Generate KB list from string
+    set_fact: 
+      kb_list: "{{ KBs.split(',') | list }}"
+
+    # Install
+  - name: Install Hotfixes
+    win_hotfix:
+      source: C:\temp\{{ item }}.msu
+      state: present
+      register: hotfix_install
+    loop: "{{ kb_list }}"
+
