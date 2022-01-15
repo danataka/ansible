@@ -5,9 +5,9 @@ spasky.local # Sandbox Kali
 karpov.local # Ubuntu Surface
 
 [win]
-carlsen.local # Sandboc 2016
+carlsen.local # Sandbox 2016
 anand.local # Sandbox 2012 R2
-kasparov.local # Desktop 10 / Ubuntu WSL
+kasparov.local # Desktop 10
 lasker.local # Sandbox 10
 
 [win:vars]
