@@ -1,20 +1,20 @@
-linux:
-  hosts:
-    karpov.local: # Ubuntu Surface
-    fischer.local: # Pi
-    spasky.local: # Sandbox Kali
-    short.local: # Ubuntu laptop
+[linux]
+short.local # Ubuntu Laptop
+fischer.local # Pi
+spasky.local # Sandbox Kali
+karpov.local # Ubuntu Surface
 
-win:
-  hosts:
-    tal.local: # Work Laptop
-    kasparov.local: # Desktop
-    lasker.local: # Sandbox Windows 10
-    anand.local: # Sandbox Server 2012R2
-    carlsen.local: # Sandbox Server 2016
-    #capablanca.local: # Sandbox Server 2019 
+[win]
+carlsen.local # Sandboc 2016
+anand.local # Sandbox 2012 R2
+kasparov.local # Desktop 10 / Ubuntu WSL
+lasker.local # Sandbox 10
 
-sandbox:
-  hosts:
-    lasker.local:
-    spasky.local:
+[win:vars]
+ansible_shell_type=cmd
+
+[all:vars]
+ansible_ssh_user=dan
+ansible_user=dan
+ansible_connection=ssh
+
