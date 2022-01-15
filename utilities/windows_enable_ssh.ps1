@@ -13,3 +13,6 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
 } else {
     Write-Output "Firewall rule 'OpenSSH-Server-In-TCP' has been created and exists."
 }
+
+
+# icacls.exe "C:\ProgramData\ssh\administrators_authorized_keys" /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"

@@ -12,7 +12,7 @@ win:
     lasker.local: # Sandbox Windows 10
     anand.local: # Sandbox Server 2012R2
     carlsen.local: # Sandbox Server 2016
-    capablanca.local: # Sandbox Server 2019 
+    #capablanca.local: # Sandbox Server 2019 
 
 sandbox:
   hosts:
