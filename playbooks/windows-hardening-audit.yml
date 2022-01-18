@@ -1,0 +1,44 @@
+---
+- name: windows-hardening-audit
+  hosts: windows
+  
+  tasks:
+  - name: Display Windows Version
+    ansible.builtin.debug: 
+      var: ansible_facts['distribution_version']
+  
+  - name: Ensure temp exists
+    ansible.windows.win_file:
+      path: C:\temp
+      state: directory
+  
+  - name: Copy hardening repo
+    ansible.windows.win_copy:
+      src: /mnt/d/repos/windows_hardening
+      dest: C:\temp
+
+  # 2012 R2 - 6.3.9600.0
+  - name: Run 2012 R2 Audit
+    ansible.windows.win_powershell:
+      script: |
+        cd c:\temp\windows_hardening
+        Import-Module .\Invoke-HardeningKitty.ps1
+        Invoke-HardeningKitty -FileFindingList .\lists\finding_list_cis_microsoft_windows_server_2012_r2_2.4.0_machine.csv -SkipMachineInformation -Report -ReportFile C:\temp\windows-hardening\report.log
+    when: ansible_facts['distribution_version'] == "6.3.9600.0"
+
+  # 2016 - 10.0.14393.0
+  - name: Run 2016 Audit
+    ansible.windows.win_powershell:
+      script: |
+        cd c:\temp\windows_hardening
+        Import-Module .\Invoke-HardeningKitty.ps1
+        Invoke-HardeningKitty -FileFindingList .\lists\finding_list_cis_microsoft_windows_server_2016_1607_1.2.0_machine.csv -SkipMachineInformation -Report -ReportFile C:\temp\windows-hardening\report.log
+    when: ansible_facts['distribution_version'] == "10.0.14393.0"
+
+  - name: Fetch report file
+    fetch: src=C:/temp/windows_hardening/report.log dest=/home/dan/{{inventory_hostname}}-report.log flat=yes
+  
+  - name: Clean up
+    ansible.windows.win_file:
+      path: C:\temp\windows_hardening
+      state: absent

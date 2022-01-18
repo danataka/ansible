@@ -1,12 +1,12 @@
 ---
 # Windows Patches - January 2022
 
-- hosts: all
+- hosts: windows
   collections:
     - community.windows
 
   tasks:
-  - name: Display OS Distribution Version
+  - name: Display Windows Version
     ansible.builtin.debug: 
       var: ansible_facts['distribution_version']
   
