@@ -1,5 +1,5 @@
 ---
-- name: windows-hardening-audit
+- name: windows-hardening-apply
   hosts: servers
   
   tasks:
@@ -19,8 +19,8 @@
 
   # 2012 R2 - 6.3.9600.0
   - block:
-    - name: Run 2012R2 Audit
-      ansible.windows.win_shell: c:\temp\windows_hardening\audit2012r2.ps1
+    - name: Backup and Harden 2012R2
+      ansible.windows.win_shell: c:\temp\windows_hardening\harden2012r2.ps1
       register: host_out
     - name: Create report.log  
       ansible.windows.win_copy:
@@ -30,8 +30,8 @@
 
   # 2016 - 10.0.14393.0
   - block:
-    - name: Run 2016 Audit
-      ansible.windows.win_shell: c:\temp\windows_hardening\audit2016.ps1
+    - name: Backup and Harden 2016
+      ansible.windows.win_shell: c:\temp\windows_hardening\harden2016.ps1
       register: host_out
     - name: Create report.log  
       ansible.windows.win_copy:
@@ -41,8 +41,8 @@
 
   # 2019 - 10.0.17763.0
   - block:
-    - name: Run 2019 Audit
-      ansible.windows.win_shell: c:\temp\windows_hardening\audit2019.ps1
+    - name: Backup and Harden 2019
+      ansible.windows.win_shell: c:\temp\windows_hardening\harden2019.ps1
       register: host_out
     - name: Create report.log  
       ansible.windows.win_copy:
@@ -50,9 +50,11 @@
         dest: C:\temp\windows_hardening\report.log
     when: ansible_facts['distribution_version'] == "10.0.17763.0"
 
+  - name: Fetch backup file
+    fetch: src=C:/temp/backup.csv dest=/backups/hardening-backup-{{inventory_hostname}}-{{ ansible_date_time.iso8601 }}.csv flat=yes
   
-  - name: Fetch report file
-    fetch: src=C:/temp/windows_hardening/report.log dest=/reports/hardening-audit-{{inventory_hostname}}-{{ ansible_date_time.iso8601 }}.log flat=yes
+  - name: Fetch log file
+    fetch: src=C:/temp/windows_hardening/report.log dest=/reports/hardening-apply-{{inventory_hostname}}-{{ ansible_date_time.iso8601 }}.csv flat=yes
   
   - name: Clean up
     ansible.windows.win_file:
