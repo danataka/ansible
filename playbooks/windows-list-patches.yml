@@ -12,11 +12,11 @@
         - SecurityUpdates
         - CriticalUpdates
         - Update Rollups
-      state: downloaded
+      state: searched
       log_path: C:\ansible_wu.txt
   
   - name: Fetch report file
-    fetch: src=C:/ansible_wu.txt dest=/home/dan/{{inventory_hostname}}-updates.log flat=yes
+    fetch: src=C:/ansible_wu.txt dest=/reports/{{inventory_hostname}}-updates.log flat=yes
   
   - name: Clean up
     ansible.windows.win_file:

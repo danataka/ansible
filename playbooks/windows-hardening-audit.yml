@@ -1,6 +1,6 @@
 ---
 - name: windows-hardening-audit
-  hosts: servers
+  hosts: windows
   
   tasks:
   - name: Display Windows Version
