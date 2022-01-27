@@ -1,0 +1,57 @@
+- name: update apt
+  apt:
+    update_cache: True
+
+- name: Install snap
+  apt:
+    name: snapd
+    state: present
+
+- name: Install screen
+  apt:
+    name: screen
+    state: present
+
+- name: Install curl
+  apt:
+    name: curl
+    state: present
+
+- name: Install lsd
+  snap:
+    name: lsd
+
+- name: Install neofetch
+  apt:
+    name: neofetch
+
+- name: Install httpie
+  apt:
+    name: httpie
+
+- name: Install code
+  snap:
+    name: code
+    classic: yes
+
+- name: Install git-kraken
+  snap:
+    name: gitkraken
+    classic: yes
+
+- name: Install powershell
+  snap:
+    name: powershell
+    classic: yes
+
+- name: Install McFly
+  shell: curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly --force
+
+- name: Add McFly to .bashrc
+  lineinfile:
+    dest: /home/dan/.bashrc
+    line: 'eval "$(mcfly init bash)"'
+    owner: dan
+    state: present
+    insertafter: EOF
+    create: True
