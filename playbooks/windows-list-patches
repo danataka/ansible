@@ -1,0 +1,27 @@
+---
+# List Windows Patches
+
+- hosts: windows
+  collections:
+    - community.windows
+
+  tasks:
+  - name: Search and download-only, return list of found updates (if any), log to C:\ansible_wu.txt
+    ansible.windows.win_updates:
+      category_names:
+        - SecurityUpdates
+        - CriticalUpdates
+        - Update Rollups
+      state: searched
+      log_path: C:\ansible_wu.txt
+  
+  - name: Fetch report file
+    fetch: src=C:/ansible_wu.txt dest=/reports/{{inventory_hostname}}-updates.log flat=yes
+  
+  - name: Clean up
+    ansible.windows.win_file:
+      path: C:\ansible_wu.txt
+      state: absent
+
+
+

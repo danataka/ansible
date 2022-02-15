@@ -1,5 +1,0 @@
----
-- hosts: windows
-  roles: 
-    - { role: ../roles/windows_hardening, mode: "apply" }
-  gather_facts: yes

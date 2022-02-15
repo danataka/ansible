@@ -7,6 +7,30 @@
     name: snapd
     state: present
 
+- name: Enable snap
+  shell:
+    cmd: systemctl enable --now snapd apparmor
+
+- name: Make sure snapd service unit is running
+  ansible.builtin.systemd:
+    state: started
+    name: snapd
+  
+- name: Make sure apparmor service unit is running
+  ansible.builtin.systemd:
+    state: started
+    name: apparmor
+
+- name: Install gnome-tweaks-tool
+  apt:
+    name: gnome-tweak-tool
+    state: present
+  
+- name: Install gnome-shell-extensions
+  apt:
+    name: gnome-shell-extensions
+    state: present
+
 - name: Install screen
   apt:
     name: screen
@@ -44,6 +68,15 @@
     name: powershell
     classic: yes
 
+- name: Install Minecraft 
+  snap:
+    name: mc-installer
+    classic: yes
+
+- name: Install speedtest
+  apt:
+    name: speedtest-cli
+
 - name: Install McFly
   shell: curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly --force
 
@@ -55,3 +88,28 @@
     state: present
     insertafter: EOF
     create: True
+
+- name: Install ansible
+  apt:
+    name: ansible
+
+- name: Ensure installers directory exists
+  file:
+    path: /installers
+    state: directory
+
+- name: Copy Remote Desktop Manager to installers
+  copy:
+    src: /installers/rdm.deb
+    dest: /installers/rdm.deb
+
+- name: Install RDM
+  apt:
+    deb: /installers/rdm.deb
+
+- name: Copy Remote Desktop Manager database
+  copy:
+    src: /home/dan/.rdm/Connections.db
+    dest: /home/dan/.rdm/Connections.db
+
+

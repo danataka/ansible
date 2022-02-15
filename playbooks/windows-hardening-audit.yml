@@ -1,5 +1,0 @@
----
-- hosts: win
-  roles: 
-    - { role: ../roles/windows_hardening, mode: "audit" }
-  gather_facts: yes

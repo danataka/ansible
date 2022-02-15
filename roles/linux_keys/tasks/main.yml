@@ -1,0 +1,12 @@
+- name: copy keys
+  copy:
+    src: /home/dan/.ssh/
+    dest: /home/dan/.ssh/
+
+- name: make private key just that
+  shell:
+    cmd: chmod 400 /home/dan/.ssh/id_rsa
+
+- name: make my key just that
+  shell:
+    cmd: chown dan /home/dan/.ssh/id_rsa
