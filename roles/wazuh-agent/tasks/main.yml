@@ -1,0 +1,28 @@
+
+- block:
+  - name: Linux Install
+    ansible.builtin.shell: curl -so wazuh-agent-4.2.5.deb https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.2.5-1_amd64.deb && sudo MANAGER_IP='{{ip}}' WAZUH_MANAGER='{{ip}}' WAZUH_AGENT_GROUP='default' dpkg -i ./wazuh-agent-4.2.5.deb
+    become: true
+  - name: Linux Replace
+    become: true
+    ansible.builtin.replace:
+      path: /var/ossec/etc/ossec.conf
+      regexp: 'MANAGER_IP'
+      replace: '{{ip}}'
+  - name: Linux Restart
+    ansible.builtin.shell: sudo systemctl restart wazuh-agent
+    become: true
+  when: ansible_system == "Linux"
+
+- block:
+  - name: Windows Install
+    ansible.windows.win_package:
+      path: https://packages.wazuh.com/4.x/windows/wazuh-agent-4.2.5-1.msi
+      wait_for_children: true
+      arguments: 
+      - WAZUH_MANAGER={{ip}}
+      - WAZUH_REGISTRATION_SERVER={{ip}}
+      - WAZUH_AGENT_GROUP=default 
+  - name: Windows Restart
+    ansible.windows.win_shell: powershell Restart-Service WazuhSvc
+  when: ansible_os_family == "Windows"

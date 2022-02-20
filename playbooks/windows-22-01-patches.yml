@@ -1,0 +1,57 @@
+---
+# Windows Patches - January 2022
+
+- hosts: windows
+  collections:
+    - community.windows
+
+  tasks:
+  - name: Display Windows Version
+    ansible.builtin.debug: 
+      var: ansible_facts['distribution_version']
+  
+  - name: Ensure Temp exists
+    ansible.windows.win_file:
+      path: C:\temp
+      state: directory
+  
+  # 2012 R2 - 6.3.9600.0
+  - name: Upload kb5008263
+    ansible.windows.win_copy:
+      src: /mnt/c/temp/kb5008263-2012.msu
+      dest: C:\temp\kb5008263-2012.msu
+    when: ansible_facts['distribution_version'] == "6.3.9600.0"
+
+  - name: Install kb5008263
+    win_hotfix:
+      source: C:\temp\kb5008263-2012.msu
+      state: present
+      register: hotfix_install
+    when: ansible_facts['distribution_version'] == "6.3.9600.0"
+
+  - name: Upload kb5007157
+    ansible.windows.win_copy:
+      src: /mnt/c/temp/kb5007157-2012.msu
+      dest: C:\temp\kb5007157-2012.msu
+    when: ansible_facts['distribution_version'] == "6.3.9600.0"
+
+  - name: Install kb5007157
+    win_hotfix:
+      source: C:\temp\kb5007157-2012.msu
+      state: present
+      register: hotfix_install
+    when: ansible_facts['distribution_version'] == "6.3.9600.0"
+  
+  # 2016 - 10.0.14393.0
+  - name: Upload kb5008207
+    ansible.windows.win_copy:
+      src: /mnt/c/temp/kb5008207-2016.msu
+      dest: C:\temp\kb5008207-2016.msu
+    when: ansible_facts['distribution_version'] == "10.0.14393.0"
+
+  - name: Install kb5008207
+    win_hotfix:
+      source: C:\temp\kb5008207-2016.msu
+      state: present
+      register: hotfix_install
+    when: ansible_facts['distribution_version'] == "10.0.14393.0"
