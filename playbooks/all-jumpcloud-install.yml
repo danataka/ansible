@@ -1,0 +1,4 @@
+  - hosts: all
+    roles: 
+      - { role: ../roles/jumpcloud-agent, connect_key: '5eb3a1e83db710ae7c46105519b2892d507e04d0' }
+    gather_facts: yes
