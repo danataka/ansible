@@ -1,4 +1,4 @@
   - hosts: all
     roles: 
-      - { role: ../roles/wazuh-agent, ip: '192.168.3.118' }
+      - { role: ../roles/wazuh-agent, ip: 'agileguy-docker.canadaeast.cloudapp.azure.com' }
     gather_facts: yes

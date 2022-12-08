@@ -1,0 +1,11 @@
+---
+hosts: aka2sql
+  - name: first patch
+    ansible.builtin.fetch:
+      src: c:/temp/windows1.msu
+      dest: /tmp/windows1.msu
+
+  - name: second patch  
+    ansible.builtin.fetch:
+      src: c:/temp/windows1.msu
+      dest: /tmp/windows1.msu

@@ -1,7 +1,7 @@
 
 - block:
   - name: Linux Install
-    ansible.builtin.shell: "curl --tlsv1.2 --silent --show-error --header 'x-connect-key: {{connect_key}}' https://kickstart.jumpcloud.com/Kickstart | sudo bash"
+    shell: "curl --tlsv1.2 --silent --show-error --header 'x-connect-key: {{connect_key}}' https://kickstart.jumpcloud.com/Kickstart | sudo bash"
     become: true
   when: ansible_system == "Linux"
 

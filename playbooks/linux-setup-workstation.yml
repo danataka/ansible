@@ -1,6 +1,5 @@
 - hosts: linux
   roles: 
     - { role: ../roles/linux_workstation, become: true }
-    #- { role: ../roles/linux_aka_setup, become: true}
-    #- { role: ../roles/linux_keys, become: true }
+    - { role: ../roles/linux_keys, become: true }
   gather_facts: yes

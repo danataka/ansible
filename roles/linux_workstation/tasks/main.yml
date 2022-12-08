@@ -21,21 +21,6 @@
     state: started
     name: apparmor
 
-- name: Install gnome-tweaks-tool
-  apt:
-    name: gnome-tweak-tool
-    state: present
-  
-- name: Install gnome-shell-extensions
-  apt:
-    name: gnome-shell-extensions
-    state: present
-
-- name: Install screen
-  apt:
-    name: screen
-    state: present
-
 - name: Install curl
   apt:
     name: curl
@@ -63,14 +48,14 @@
     name: gitkraken
     classic: yes
 
+- name: Install joplin
+  snap:
+    name: joplin
+    classic: yes
+
 - name: Install powershell
   snap:
     name: powershell
-    classic: yes
-
-- name: Install Minecraft 
-  snap:
-    name: mc-installer
     classic: yes
 
 - name: Install speedtest
@@ -107,9 +92,9 @@
   apt:
     deb: /installers/rdm.deb
 
-- name: Copy Remote Desktop Manager database
-  copy:
-    src: /home/dan/.rdm/Connections.db
-    dest: /home/dan/.rdm/Connections.db
+#- name: Copy Remote Desktop Manager database
+#  copy:
+#    src: /home/dan/.rdm/Connections.db
+#    dest: /home/dan/.rdm/Connections.db
 
 
