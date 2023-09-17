@@ -34,9 +34,6 @@
   apt:
     name: neofetch
 
-- name: Install httpie
-  apt:
-    name: httpie
 
 - name: Install code
   snap:
@@ -58,9 +55,6 @@
     name: powershell
     classic: yes
 
-- name: Install speedtest
-  apt:
-    name: speedtest-cli
 
 - name: Install McFly
   shell: curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly --force
@@ -78,23 +72,6 @@
   apt:
     name: ansible
 
-- name: Ensure installers directory exists
-  file:
-    path: /installers
-    state: directory
 
-- name: Copy Remote Desktop Manager to installers
-  copy:
-    src: /installers/rdm.deb
-    dest: /installers/rdm.deb
-
-- name: Install RDM
-  apt:
-    deb: /installers/rdm.deb
-
-#- name: Copy Remote Desktop Manager database
-#  copy:
-#    src: /home/dan/.rdm/Connections.db
-#    dest: /home/dan/.rdm/Connections.db
 
 

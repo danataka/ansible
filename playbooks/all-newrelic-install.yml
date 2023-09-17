@@ -1,4 +1,0 @@
-  - hosts: all
-    roles: 
-      - { role: ../roles/newrelic-agent, license: '2e31569d29983669c93384b67a909c35FFFFNRAL' }
-    gather_facts: yes
